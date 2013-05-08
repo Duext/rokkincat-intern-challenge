@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" style="background-color:lightgreen">
+	<head>
+		<meta charset="utf8">
+		<title>Tom Duex's ToDo List</title>
+	</head>
+	<body>
+		<h2>Tom Duex's ToDo List</h2>
+		<form action="/" method="post">
+			<input type="text" id="note" name="note" value="Write your note here">
+			<input type="submit" id="submit" value="Add note">
+		</form>
+		<div id="notes">
+			<% @todos.each do |todo| %>
+				<br>---------------------------------------------
+				<br><%= todo.text %><br>Status: 
+				<% if todo.done %>
+					<%= "DONE" %> 
+				<% else %> 
+					<%= "NOT DONE" %>
+				<% end %>
+				<form action="/edit/<%= todo.id %>" method="post">
+					<input type="text" id="edit" name="edit" value="Type here to edit the note">
+					<input type="submit" value="Edit Note">
+				</form>
+				<form action="/status/<%= todo.id %>" method="post">
+					<input type="submit" value="Change Status">
+				</form>
+				<form action="/delete/<%= todo.id %>" method="post">
+					<input type="submit" value="Delete">
+				</form>
+			<% end %>
+		</div>
+	</body>
+</html>
